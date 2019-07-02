@@ -1,6 +1,9 @@
 # YoungTestcases
 Testfälle fuer Youngtableaux
 
+## ACHTUNG:
+Bei TestStruc wird bei der Testmethode "test_multipyCmpWord" immer ein Fehler ausgegeben wenn ihr das nicht genauso implementiert habt wie ich, genaueres
+steht in der .py als Kommentar bei der Methode!
 ## VERFAHREN:
 1. Runterladen
 2. Den Ordner "YoungTestcases" und "YoungTableau" muessen im selben verzeichnis sein
