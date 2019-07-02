@@ -4,6 +4,7 @@ sys.path.append(os.path.abspath(os.path.dirname(__file__) + '/' + '../YoungTable
  
 
 from struc import *
+import random
 import unittest
 
 
@@ -57,29 +58,99 @@ class TestWords(unittest.TestCase):
 
 class TestVisual(unittest.TestCase):
     def testsheet(self):
+        #verschiedene boxlengts testen
+        #verschiedene matrizen testen
+        #latex file pruefen
+        #pdf pruefen
         pass
 
+class TestK_relationsoperations(unittest.TestCase):
+    def testsheet(self):
+        pass
+
+class TestVisual(unittest.TestCase):
+    def testsheet(self):
+        pass
+
+class TestYoungTableau(unittest.TestCase):
+    def test_row_ins(self):
+        pass
+    def test_visual(self):
+        pass
+    def test_getword(self):
+        pass
+    
 class TestStruc(unittest.TestCase):
+    def test_createfrom(self):
+        pass
+
+    def test_multclasses(self):
+        pass
+    def test_equiv(self):
+        pass
     def test_multiply(self):
 
         #test easy
         data= "2 1 3"
-        result = multiply(parse_word(data), parse_word(data)).word
+        result = multiply(parse_word(data), parse_word(data)).wordstring
         self.assertEqual(result, "3 2 2 1 1 3")
         
         data1= "100 50 82 83 40 40 40 55 58 12 18 30 50 50 4 12 13 20 21 3 3 3 5 20 20 1 2 2 3 3 4 6 20"
         data2= "100 50 82 83 40 40 40 55 58"
-        result = multiply(parse_word(data1), parse_word(data2)).word
+        result = multiply(parse_word(data1), parse_word(data2)).wordstring
         self.assertEqual(result, "100 50 82 83 40 40 40 55 58 12 18 30 50 50 4 12 13 20 21 100 3 3 3 5 20 20 50 82 83 1 2 2 3 3 4 6 20 40 40 40 55 58")
 
         data1= "100 50 82 83 40 40 40 55 58 12 18 30 50 50 4 12 13 20 21 3 3 3 5 20 20 1 2 2 3 3 4 6 20"
         data2= "100 50 82 83 40 40 40 55 58 12 18 30 50 50"
-        result = multiply(parse_word(data1), parse_word(data2)).word
+        result = multiply(parse_word(data1), parse_word(data2)).wordstring
         self.assertEqual(result, "100 50 82 83 40 40 40 55 58 12 18 30 50 50 100 4 12 13 20 21 50 82 83 3 3 3 5 20 20 20 40 40 55 58 1 2 2 3 3 4 6 12 18 30 40 50 50")
 
+
+        data1 = "18 16 9 11 24"
+        data2 = "20 25 2 14 20"
+        result = multiply(parse_word(data1), parse_word(data2)).wordstring
+        self.assertEqual(result, "18 16 24 9 20 25 2 11 14 20")
+
+
+        data1 = "18 11 15 8 11"
+        data2 = "7 8 1 3 11"
+        result = multiply(parse_word(data1), parse_word(data2)).wordstring
+        self.assertEqual(result, "18 11 15 8 11 7 8 1 3 11")
+
+        data1 = "11 10 20 6 19"
+        data2 = "14 11 12 15 20"
+        result = multiply(parse_word(data1), parse_word(data2)).wordstring
+        self.assertEqual(result, "20 11 19 10 14 6 11 12 15 20")
+         
+
+        
         #auch nochmal analog mit createfrom
         #multiply(create_from(8, "ttest.txt"), create_from(8, "ttest.txt")).visual(1,"777.tex")
+    def test_multipyCmpWord(self):
+        for i in range(0,20):
+            wort1 = ""
+            wort2 = ""
+            for j in range(0,5):
+                wort1 = wort1 + str(random.randint(1,25)) + " "
+                wort2 = wort2 + str(random.randint(1,25)) + " "
+            wort1 = wort1[:-1]
+            wort2 = wort2[:-1]
+
         
+
+        #Geht nur, wenn:
+        #bei mult_classes der Repraesentant das Wort ist, das in eine Young Matrix ueberfuehrt werden kann UND
+        #die klasse Youngtableau muss das Attribut word besitzen, in dem das uebergebene wort gespeichert ist.7
+        #analog muss in der word klasse, das attribut wordstring enthalten sein, dass das wort als string enthaelt
+        #get_wyt(wort - string) ist funktion, die das zu wort aequival. wort zurueckgibt, dass in eine young matrix ueberfuehrt
+        #werden kann!
+        vgl_wort1 = get_wyt(wort1)
+        vgl_wort2 = get_wyt(wort2)
+        #print(vgl_wort1, vgl_wort2)
+        
+        result = (multiply(parse_word(vgl_wort1), parse_word(vgl_wort2)).wordstring)
+        self.assertEqual(result, get_wyt(mult_classes(word(wort1), word(wort2)).wordstring))
+                
 if __name__ == '__main__':
     unittest.main()
     
