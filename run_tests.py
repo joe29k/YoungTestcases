@@ -34,7 +34,7 @@ class TestWords(unittest.TestCase):
         
     def test_parse(self):
         
-        result = parse(0, "testcases/words.txt")
+        result = parse(0, "words.txt")
         self.assertEqual(result, [[1, 2, 2, 3, 3, 5], [2, 3, 5, 5], [4, 4, 6, 6], [5,6]])
 
         #result = parse(1, "testcases/words.txt")
@@ -83,8 +83,8 @@ class TestStruc(unittest.TestCase):
 if __name__ == '__main__':
     unittest.main()
     
-parse1()
-print(parse_word("5 6 4 4 6 6 2 3 5 5 1 2 2 3 3 5"))
-multiply(create_from(8, "ttest.txt"), create_from(8, "ttest.txt")).visual(1,"777.tex")
-print("Everything passed")
+#parse1()
+#print(parse_word("5 6 4 4 6 6 2 3 5 5 1 2 2 3 3 5"))
+#multiply(create_from(8, "ttest.txt"), create_from(8, "ttest.txt")).visual(1,"777.tex")
+#print("Everything passed")
 
