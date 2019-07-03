@@ -23,6 +23,9 @@ class TestWords(unittest.TestCase):
         data = "7 8 9 10 11 12 13 14 5 6 4 4 6 1 2 3 5 5 1 2 2 3 3 5"
         self.assertRaises(ValueError, parse_word, data)
 
+        self.assertEqual(parse_word(""), [])
+        self.assertEqual(parse_word(" "), [])
+        self.assertEqual(parse_word(" 1  2 3 4       5"), [[1,2,3,4,5]])
 
         #TESTS AUS DER ttest.txt ABER KOPIERT
         data = "5 6 7 8 5 5 6 7 8"
@@ -34,13 +37,23 @@ class TestWords(unittest.TestCase):
 
         
     def test_parse(self):
+
+        #TESTS MIT WOERTERN AUS DATEI words.txt
+        #IN ZEILE 1/4 EIN GUELTIGES WORT, ZEILE 2-4 und 6 IST KEIN YOUNG TABL.
+        #ZEILE 5 ist das leere wort
+        #IN PYTHON HAT 1. ZEILE INDEX 0
         
         result = parse(0, "words.txt")
         self.assertEqual(result, [[1, 2, 2, 3, 3, 5], [2, 3, 5, 5], [4, 4, 6, 6], [5,6]])
 
-        #result = parse(1, "testcases/words.txt")
-        #self.assertEqual(result, [[1, 2, 2, 3, 3, 5], [2, 3, 5, 5], [4, 4, 6, 6], [5,6]])
+        result = parse(4, "words.txt")
+        self.assertEqual(result, [])
 
+
+        self.assertRaises(ValueError, parse, 1, "words.txt")
+        self.assertRaises(ValueError, parse, 2, "words.txt")
+        self.assertRaises(ValueError, parse, 3, "words.txt")
+        self.assertRaises(ValueError, parse, 5, "words.txt")
         
         
         #assert parse_word() == erg, errorstr + str(wort[1])
@@ -58,17 +71,18 @@ class TestWords(unittest.TestCase):
 
 class TestVisual(unittest.TestCase):
     def testsheet(self):
-        #verschiedene boxlengts testen
+        #Diese sind in der Visual_tests.py Datei!!!!
+
+        
+        #print_tex([[1, 2, 2, 3, 3, 5], ['2', '3', '5', '5'], ['4', '4', '6', '6'], ['5', '6']], 1)
+        #print_tex([[1, 2, 3]], 1)
+        #verschiedene boxlengths testen
         #verschiedene matrizen testen
         #latex file pruefen
         #pdf pruefen
         pass
 
 class TestK_relationsoperations(unittest.TestCase):
-    def testsheet(self):
-        pass
-
-class TestVisual(unittest.TestCase):
     def testsheet(self):
         pass
 
@@ -150,7 +164,7 @@ class TestStruc(unittest.TestCase):
         
         result = (multiply(parse_word(vgl_wort1), parse_word(vgl_wort2)).wordstring)
         self.assertEqual(result, get_wyt(mult_classes(word(wort1), word(wort2)).wordstring))
-                
+
 if __name__ == '__main__':
     unittest.main()
     

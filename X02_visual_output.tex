@@ -1,0 +1,101 @@
+\documentclass{article}
+
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\begin{document}
+\begin{figure}
+\tikzset{
+tick/.style = {black, very thick}
+}
+
+\begin{tikzpicture} % boxlength=5%ZEILE NR. 0 (von unten)
+
+%ELEMENT IN SPALTE NR. 0 (von links)
+\draw [ultra thick] (0,0) rectangle (5,5);
+\node at ($(2.5,2.5)$) {$5$};
+
+%ELEMENT IN SPALTE NR. 1 (von links)
+\draw [ultra thick] (5,0) rectangle (10,5);
+\node at ($(7.5,2.5)$) {$6$};
+
+
+
+
+%ZEILE NR. 1 (von unten)
+
+%ELEMENT IN SPALTE NR. 0 (von links)
+\draw [ultra thick] (0,5) rectangle (5,10);
+\node at ($(2.5,7.5)$) {$4$};
+
+%ELEMENT IN SPALTE NR. 1 (von links)
+\draw [ultra thick] (5,5) rectangle (10,10);
+\node at ($(7.5,7.5)$) {$4$};
+
+%ELEMENT IN SPALTE NR. 2 (von links)
+\draw [ultra thick] (10,5) rectangle (15,10);
+\node at ($(12.5,7.5)$) {$6$};
+
+%ELEMENT IN SPALTE NR. 3 (von links)
+\draw [ultra thick] (15,5) rectangle (20,10);
+\node at ($(17.5,7.5)$) {$6$};
+
+
+
+
+%ZEILE NR. 2 (von unten)
+
+%ELEMENT IN SPALTE NR. 0 (von links)
+\draw [ultra thick] (0,10) rectangle (5,15);
+\node at ($(2.5,12.5)$) {$2$};
+
+%ELEMENT IN SPALTE NR. 1 (von links)
+\draw [ultra thick] (5,10) rectangle (10,15);
+\node at ($(7.5,12.5)$) {$3$};
+
+%ELEMENT IN SPALTE NR. 2 (von links)
+\draw [ultra thick] (10,10) rectangle (15,15);
+\node at ($(12.5,12.5)$) {$5$};
+
+%ELEMENT IN SPALTE NR. 3 (von links)
+\draw [ultra thick] (15,10) rectangle (20,15);
+\node at ($(17.5,12.5)$) {$5$};
+
+
+
+
+%ZEILE NR. 3 (von unten)
+
+%ELEMENT IN SPALTE NR. 0 (von links)
+\draw [ultra thick] (0,15) rectangle (5,20);
+\node at ($(2.5,17.5)$) {$1$};
+
+%ELEMENT IN SPALTE NR. 1 (von links)
+\draw [ultra thick] (5,15) rectangle (10,20);
+\node at ($(7.5,17.5)$) {$2$};
+
+%ELEMENT IN SPALTE NR. 2 (von links)
+\draw [ultra thick] (10,15) rectangle (15,20);
+\node at ($(12.5,17.5)$) {$2$};
+
+%ELEMENT IN SPALTE NR. 3 (von links)
+\draw [ultra thick] (15,15) rectangle (20,20);
+\node at ($(17.5,17.5)$) {$3$};
+
+%ELEMENT IN SPALTE NR. 4 (von links)
+\draw [ultra thick] (20,15) rectangle (25,20);
+\node at ($(22.5,17.5)$) {$3$};
+
+%ELEMENT IN SPALTE NR. 5 (von links)
+\draw [ultra thick] (25,15) rectangle (30,20);
+\node at ($(27.5,17.5)$) {$5$};
+
+
+
+
+
+
+
+\end{tikzpicture}
+\end{figure}
+\end{document}
+
