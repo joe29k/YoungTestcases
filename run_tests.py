@@ -137,14 +137,14 @@ class TestYoungTableau(unittest.TestCase):
     #METHODE ZUM TESTEN VON VISUAL -> SIEHE VISUAL_TESTS.py
     def test_row_ins(self):
         yt = youngtableau("5 6 4 4 6 6 2 3 5 5 1 2 2 3 3 5")
-        self.assertEqual(yt.row_insert(1), [[1, 1, 2, 3, 3, 5], [2, 2, 5, 5], [3, 4,6, 6],[4,6],[5]])
+        self.assertEqual(yt.row_insert(1).matrix, [[1, 1, 2, 3, 3, 5], [2, 2, 5, 5], [3, 4,6, 6],[4,6],[5]])
 
         yt = youngtableau("")
-        self.assertEqual(yt.row_insert(1), [[1]])
+        self.assertEqual(yt.row_insert(1).matrix, [[1]])
 
         #GRENZFALL "ECHT GROESSER"
         yt = youngtableau("5 6 4 4 6 6 2 3 5 5 1 2 2 3 3 5")
-        self.assertEqual(yt.row_insert(5), [[1, 2, 2, 3, 3, 5, 5], [2, 3, 5, 5], [4, 4,6, 6],[5,6]])
+        self.assertEqual(yt.row_insert(5).matrix, [[1, 2, 2, 3, 3, 5, 5], [2, 3, 5, 5], [4, 4,6, 6],[5,6]])
         
 
     def test_getword(self):
@@ -181,35 +181,35 @@ class TestStruc(unittest.TestCase):
     def test_multiply(self):
 
         #test easy
-        data= "2 1 3"
-        result = multiply(parse_word(data), parse_word(data)).wort
+        data= youngtableau("2 1 3")
+        result = multiply(data, data).wort
         self.assertEqual(result, "3 2 2 1 1 3")
         
-        data1= "100 50 82 83 40 40 40 55 58 12 18 30 50 50 4 12 13 20 21 3 3 3 5 20 20 1 2 2 3 3 4 6 20"
-        data2= "100 50 82 83 40 40 40 55 58"
-        result = multiply(parse_word(data1), parse_word(data2)).wort
+        data1= youngtableau("100 50 82 83 40 40 40 55 58 12 18 30 50 50 4 12 13 20 21 3 3 3 5 20 20 1 2 2 3 3 4 6 20")
+        data2= youngtableau("100 50 82 83 40 40 40 55 58")
+        result = multiply(data1, data2).wort
         self.assertEqual(result, "100 50 82 83 40 40 40 55 58 12 18 30 50 50 4 12 13 20 21 100 3 3 3 5 20 20 50 82 83 1 2 2 3 3 4 6 20 40 40 40 55 58")
 
-        data1= "100 50 82 83 40 40 40 55 58 12 18 30 50 50 4 12 13 20 21 3 3 3 5 20 20 1 2 2 3 3 4 6 20"
-        data2= "100 50 82 83 40 40 40 55 58 12 18 30 50 50"
-        result = multiply(parse_word(data1), parse_word(data2)).wort
+        data1= youngtableau("100 50 82 83 40 40 40 55 58 12 18 30 50 50 4 12 13 20 21 3 3 3 5 20 20 1 2 2 3 3 4 6 20")
+        data2= youngtableau("100 50 82 83 40 40 40 55 58 12 18 30 50 50")
+        result = multiply(data1, data2).wort
         self.assertEqual(result, "100 50 82 83 40 40 40 55 58 12 18 30 50 50 100 4 12 13 20 21 50 82 83 3 3 3 5 20 20 20 40 40 55 58 1 2 2 3 3 4 6 12 18 30 40 50 50")
 
 
-        data1 = "18 16 9 11 24"
-        data2 = "20 25 2 14 20"
-        result = multiply(parse_word(data1), parse_word(data2)).wort
+        data1 = youngtableau("18 16 9 11 24")
+        data2 = youngtableau("20 25 2 14 20")
+        result = multiply(data1, data2).wort
         self.assertEqual(result, "18 16 24 9 20 25 2 11 14 20")
 
 
-        data1 = "18 11 15 8 11"
-        data2 = "7 8 1 3 11"
-        result = multiply(parse_word(data1), parse_word(data2)).wort
+        data1 = youngtableau("18 11 15 8 11")
+        data2 = youngtableau("7 8 1 3 11")
+        result = multiply(data1, data2).wort
         self.assertEqual(result, "18 11 15 8 11 7 8 1 3 11")
 
-        data1 = "11 10 20 6 19"
-        data2 = "14 11 12 15 20"
-        result = multiply(parse_word(data1), parse_word(data2)).wort
+        data1 = youngtableau("11 10 20 6 19")
+        data2 = youngtableau("14 11 12 15 20")
+        result = multiply(data1, data2).wort
         self.assertEqual(result, "20 11 19 10 14 6 11 12 15 20")
          
 
@@ -234,36 +234,14 @@ class TestStruc(unittest.TestCase):
         #analog muss in der word klasse, das attribut wordstring enthalten sein, dass das wort als string enthaelt
         #get_wyt(wort - string) ist funktion, die das zu wort aequival. wort zurueckgibt, dass in eine young matrix ueberfuehrt
         #werden kann!
-        vgl_wort1 = get_wyt(wort1)
-        vgl_wort2 = get_wyt(wort2)
+        yt1 = word(wort1).youngtableau()
+        yt2 = word(wort2).youngtableau()
         #print(vgl_wort1, vgl_wort2)
         
-        result = (multiply(parse_word(vgl_wort1), parse_word(vgl_wort2)).wort)
-        self.assertEqual(result, get_wyt(mult_classes(word(wort1), word(wort2)).wort))
+        result = multiply(yt1, yt2).wort
+        self.assertEqual(result, (mult_classes(word(wort1), word(wort2)).youngtableau().wort))
 
-def ersatz_get_wyt(wortstring):
 
-    #NUR FUER VERSION OHNE GET WYT VERWENDEN; DANN DORT ERSATZ_ ZUSATZ ENFERNEN...
-    #Ermittelt das zu word aequivalente Wort, dass ein korrektes Young Tableau reprasentiert
-    wordlist_str = wortstring.split()
-    #alle elemente in ein zunaechst leeres young tableaux einfuegen!
-    yt = [] #young tableau in listen form
-    for i in range(0,len(wordlist_str)):
-        yt = row_insert(yt, int(wordlist_str[i]))
-    return wordFromMatrix(yt)
-
-def ersatz_wordFromMatrix(matrix): #young matrix list meiner form (erste zeile = 1. liste usw)
-    #NUR FUER VERSION OHNE GET WYT VERWENDEN; DANN DORT ERSATZ_ ZUSATZ ENFERNEN...
-        word = ""
-        matrix_rev = list(reversed(matrix))
-        for zeile in range(0, len(matrix_rev)):
-            for spalte in range(0, len(matrix_rev[zeile])):
-                word+=(str(matrix_rev[zeile][spalte]))
-                word+=" "
-        if len(word) != 0:
-            word = word[:-1]#letztes zeichen raus
-        return word
-    
 if __name__ == '__main__':
     unittest.main()
     
