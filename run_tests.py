@@ -4,6 +4,7 @@ sys.path.append(os.path.abspath(os.path.dirname(__file__) + '/' + '../YoungTable
  
 
 from struc import *
+import ytmath
 import random
 import unittest
 
@@ -13,7 +14,7 @@ errorstr= "Fehlerhafte Ausgabe, erwarteter Output: "
 
 #Wir wollen als gegeben voraus setzen, dass die Eingaben schon korrekt sind (vllt) oder später
 class TestWords(unittest.TestCase):
-    def test_parse_word(self):
+    def test_wordspy_parse_word(self):
 
         data = "5 6 4 4 6 6 2 3 5 5 1 2 2 3 3 5"
         result = parse_word(data)
@@ -36,7 +37,7 @@ class TestWords(unittest.TestCase):
 
 
         
-    def test_parse(self):
+    def test_wordspy_parse(self):
 
         #TESTS MIT WOERTERN AUS DATEI words.txt
         #IN ZEILE 1/4 EIN GUELTIGES WORT, ZEILE 2-4 und 6 IST KEIN YOUNG TABL.
@@ -70,7 +71,7 @@ class TestWords(unittest.TestCase):
 
 
 class TestVisual(unittest.TestCase):
-    def testsheet(self):
+    def testvispy(self):
         #Diese sind in der Visual_tests.py Datei!!!!
 
         
@@ -83,8 +84,50 @@ class TestVisual(unittest.TestCase):
         pass
 
 class TestK_relationsoperations(unittest.TestCase):
-    def testsheet(self):
-        pass
+
+    #TODO: pruefen kleinergl operation!!!
+
+
+    #TEIL A - TEST IN YTMATH
+    def test_k1_ytmath(self):
+        self.assertEqual(ytmath.K1([4,2,3,1,5],1), [4,2,1,3,5])
+        
+    def test_k1_inv_ytmath(self):
+        self.assertEqual(ytmath.K1_inv([4,2,1,3,5],1), [4,2,3,1,5])
+        
+    def test_k2_ytmath(self):
+        self.assertEqual(ytmath.K2([2,4,3,1,5],0), [4,2,3,1,5])
+    def test_k2_inv_ytmath(self):
+        self.assertEqual(ytmath.K2_inv([4,2,3,1,5], 0), [2, 4, 3,1,5])
+
+    def test_k_grenzfaelle_ytmath(self):
+        self.assertEqual(ytmath.K1_inv([4,2,3,1,5],2), [4,2,3,5,1])
+        self.assertRaises(ValueError, ytmath.K1, [4,2,3,1,5], 3)
+        self.assertRaises(ValueError, ytmath.K1, [1,2], 0)
+        self.assertEqual(ytmath.K1([2,3,1],0), [2,1,3])
+
+    def test_k_kleinergl_grenzfaelle(self):
+        self.assertEqual(ytmath.K1([2,3,1],0), [2,1,3])
+        self.assertRaises(ValueError, ytmath.K1, [1,1,1],0)
+        self.assertRaises(ValueError, ytmath.K1, [1,1,2],0)
+        self.assertRaises(ValueError, ytmath.K1, [1,2,1],0)
+        self.assertRaises(ValueError, ytmath.K1, [1,0,1],0)
+        self.assertRaises(ValueError, ytmath.K1, [2,1,3],0)
+        self.assertEqual(ytmath.K1([1,1,0],0), [1,0,1])
+
+    #TEIL B - TEST IN WORD CLASS ALSO ANALOG ABER BISSL VEREINFACHT
+    def test_k_op_struc_wordclass(self):
+        self.assertEqual(word("4 2 3 1 5").K1(1), [4,2,1,3,5])
+        self.assertEqual(word("4 2 1 3 5").K1_inv(1), [4,2,3,1,5])
+        self.assertEqual(word("2 4 3 1 5").K2(0), [4,2,3,1,5])
+        self.assertEqual(word("4 2 3 1 5").K2_inv(0), [2,4,3,1,5])
+    def test_k_op_struc_wordclass_grenzfaelle(self):
+        self.assertEqual(word("4 2 3 1 5").K1_inv(2), [4,2,3,5,1])
+        self.assertRaises(ValueError, word("4 2 3 1 5").K1, 3)
+        self.assertRaises(ValueError, word("1 2").K1, 0)
+        self.assertEqual(word("2 3 1").K1(0), [2,1,3])
+
+        
 
 class TestYoungTableau(unittest.TestCase):
     def test_row_ins(self):
