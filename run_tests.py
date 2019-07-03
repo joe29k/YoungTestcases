@@ -172,12 +172,24 @@ class TestWordClass(unittest.TestCase):
         
 class TestStruc(unittest.TestCase):
     def test_createfrom(self):
-        pass
+        self.assertRaises(ValueError, create_from, 3, "ttest.txt")
+        self.assertRaises(ValueError, create_from, 4, "ttest.txt")
+        self.assertRaises(ValueError, create_from, 9, "ttest.txt")
 
+        self.assertEqual(create_from(8, "ttest.txt").matrix, parse(8, "ttest.txt"))
+        self.assertEqual(create_from(8, "ttest.txt").matrix, [[1, 2, 2, 3, 3, 4, 6, 20]
+                                                              ,[3 ,3, 3, 5, 20, 20],[4 ,12, 13, 20, 21],[ 12, 18 ,30 ,50 ,50 ],[40, 40 ,40, 55, 58],[50, 82, 83],[100]])   
+                         
+
+            
     def test_multclasses(self):
-        pass
+
+        self.assertEqual(mult_classes(word("3 4 9 3 7"), word("1 3 1 9")).youngtableau().wort, "9 4 7 3 3 1 1 3 9")
+
     def test_equiv(self):
-        pass
+        self.assertTrue(are_equiv(word("4 2 1 3 5"), word("2 4 3 1 5")))
+        self.assertTrue(are_equiv(word(""), word("  ")))
+        self.assertFalse(are_equiv(word("4 0"), word("0 4")))
     def test_multiply(self):
 
         #test easy
@@ -241,13 +253,17 @@ class TestStruc(unittest.TestCase):
         result = multiply(yt1, yt2).wort
         self.assertEqual(result, (mult_classes(word(wort1), word(wort2)).youngtableau().wort))
 
-
+class ComplexTests(unittest.TestCase):
+    def test_multiply_createfrom_visual(self):
+        multiply(create_from(8, "ttest.txt"), create_from(8, "ttest.txt")).visual(1,"Y01_complex.tex")
+    def multclasses_equiv(self):
+        self.assertTrue(are_equiv(mult_classes(word("3 4 9 3 7"), word("1 3 1 9")), word("9 4 7 3 3 1 1 3 9")))
+        
 if __name__ == '__main__':
     unittest.main()
     
 #parse1()
 #print(parse_word("5 6 4 4 6 6 2 3 5 5 1 2 2 3 3 5"))
-#multiply(create_from(8, "ttest.txt"), create_from(8, "ttest.txt")).visual(1,"777.tex")
-#print("Everything passed")
+##print("Everything passed")
 
 
