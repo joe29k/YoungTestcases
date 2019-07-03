@@ -29,3 +29,14 @@ subprocess.call(['pdflatex', "X04_visual_output.tex"], stdout=subprocess.DEVNULL
 print_tex([], 1, "X05_visual_output.tex")
 subprocess.call(['pdflatex', "X05_visual_output.tex"], stdout=subprocess.DEVNULL)
 
+#TEST 06 - FUER YOUNGTABLEAU VISUAL METHODE
+yt = youngtableau("5 6 4 4 6 6 2 3 5 5 1 2 2 3 3 5")
+yt.visual(1, "X06_visual_output.tex")
+subprocess.call(['pdflatex', "X06_visual_output.tex"], stdout=subprocess.DEVNULL)
+
+#TEST 07 - FUER YOUNGTABLEAU VISUAL METHODE - BOXSIZE 3
+yt = youngtableau("5 6 4 4 6 6 2 3 5 5 1 2 2 3 3 5")
+yt.visual(2, "X07_visual_output.tex")
+subprocess.call(['pdflatex', "X07_visual_output.tex"], stdout=subprocess.DEVNULL)
+
+        

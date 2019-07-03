@@ -13,7 +13,7 @@ import unittest
 errorstr= "Fehlerhafte Ausgabe, erwarteter Output: "
 
 #Wir wollen als gegeben voraus setzen, dass die Eingaben schon korrekt sind (vllt) oder später
-class TestWords(unittest.TestCase):
+class TestWordsPy(unittest.TestCase):
     def test_wordspy_parse_word(self):
 
         data = "5 6 4 4 6 6 2 3 5 5 1 2 2 3 3 5"
@@ -24,8 +24,12 @@ class TestWords(unittest.TestCase):
         data = "7 8 9 10 11 12 13 14 5 6 4 4 6 1 2 3 5 5 1 2 2 3 3 5"
         self.assertRaises(ValueError, parse_word, data)
 
+        
+
         self.assertEqual(parse_word(""), [])
         self.assertEqual(parse_word(" "), [])
+
+        self.assertRaises(ValueError, parse_word, "1 2 2 3 3 5 2 3 5 5 4 4 6 6 5 6")
         self.assertEqual(parse_word(" 1  2 3 4       5"), [[1,2,3,4,5]])
 
         #TESTS AUS DER ttest.txt ABER KOPIERT
@@ -130,13 +134,42 @@ class TestK_relationsoperations(unittest.TestCase):
         
 
 class TestYoungTableau(unittest.TestCase):
+    #METHODE ZUM TESTEN VON VISUAL -> SIEHE VISUAL_TESTS.py
     def test_row_ins(self):
-        pass
-    def test_visual(self):
-        pass
+        yt = youngtableau("5 6 4 4 6 6 2 3 5 5 1 2 2 3 3 5")
+        self.assertEqual(yt.row_insert(1), [[1, 1, 2, 3, 3, 5], [2, 2, 5, 5], [3, 4,6, 6],[4,6],[5]])
+
+        yt = youngtableau("")
+        self.assertEqual(yt.row_insert(1), [[1]])
+
+        #GRENZFALL "ECHT GROESSER"
+        yt = youngtableau("5 6 4 4 6 6 2 3 5 5 1 2 2 3 3 5")
+        self.assertEqual(yt.row_insert(5), [[1, 2, 2, 3, 3, 5, 5], [2, 3, 5, 5], [4, 4,6, 6],[5,6]])
+        
+
     def test_getword(self):
-        pass
-    
+
+        for word in ["5 6 4 4 6 6 2 3 5 5 1 2 2 3 3 5", ""]:
+            yt = youngtableau(word)
+            self.assertEqual(yt.word().wordstring, word)
+
+
+class TestWordClass(unittest.TestCase):
+    #K operationen oben abgehandelt
+    def test_ytfunc(self):
+
+        #zunaechst woerter die bereits funktionierende young tableaux sind.
+        w1 = word("5 6 4 4 6 6 2 3 5 5 1 2 2 3 3 5")
+        self.assertEqual(w1.youngtableau().word().wordstring, w1.wordstring)
+        self.assertEqual(w1.youngtableau().matrix, [[1,2,2,3,3,5],[2,3,5,5],[4,4,6,6],[5,6]])
+
+        w2 = word("")
+        self.assertEqual(w2.youngtableau().matrix, [])
+
+        #jetz fehlerhafte die dann eine funktionierende (eindeutige) ergeben:
+
+
+        
 class TestStruc(unittest.TestCase):
     def test_createfrom(self):
         pass

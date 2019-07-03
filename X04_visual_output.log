@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7050 64-bit) (preloaded format=pdflatex 2019.7.1)  3 JUL 2019 07:07
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7000 64-bit) (preloaded format=pdflatex 2019.5.17)  3 JUL 2019 19:14
 entering extended mode
 **./X04_visual_output.tex
 (X04_visual_output.tex
@@ -333,8 +333,7 @@ File: tikzlibrarytopaths.code.tex 2019/05/09 v3.1.3 (3.1.3)
 ("C:\Program Files\MiKTeX 2.9\tex/generic/pgf/frontendlayer/tikz/libraries\tikz
 librarycalc.code.tex"
 File: tikzlibrarycalc.code.tex 2019/05/09 v3.1.3 (3.1.3)
-)
-No file X04_visual_output.aux.
+) (X04_visual_output.aux)
 \openout1 = `X04_visual_output.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 5.
@@ -349,6 +348,7 @@ LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 5.
 LaTeX Font Info:    ... okay on input line 5.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 5.
 LaTeX Font Info:    ... okay on input line 5.
+
 ABD: EveryShipout initializing macros
 ("C:\Program Files\MiKTeX 2.9\tex/context/base/mkii\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -414,13 +414,13 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line 15.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 15.
- [1{C:/Users/jonas/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}] (X04_vis
+ [1{C:/Users/Jonas/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}] (X04_vis
 ual_output.aux) ) 
 Here is how much of TeX's memory you used:
- 11711 strings out of 492895
- 239671 string characters out of 3133480
- 285340 words of memory out of 3000000
- 15431 multiletter control sequences out of 15000+200000
+ 11714 strings out of 492945
+ 239752 string characters out of 3135513
+ 284928 words of memory out of 3000000
+ 15414 multiletter control sequences out of 15000+200000
  3640 words of font info for 14 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  55i,8n,48p,422b,640s stack positions out of 5000i,500n,10000p,200000b,50000s
