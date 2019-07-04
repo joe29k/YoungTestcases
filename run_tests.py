@@ -270,7 +270,8 @@ class ComplexTests(unittest.TestCase):
         multiply(create_from(8, "ttest.txt"), create_from(8, "ttest.txt")).visual(1,"Y01_complex.tex")
     def multclasses_equiv(self):
         self.assertTrue(are_equiv(mult_classes(word("3 4 9 3 7"), word("1 3 1 9")), word("9 4 7 3 3 1 1 3 9")))
-        
+    def multi_ks(self):
+        self.assertEqual(K2(K1(K1_inv(K2_inv("7 1 4 9 3 6 3", 0), 1), 1),4), "1 7 4 9 3 6 6")
 if __name__ == '__main__':
     unittest.main()
     
